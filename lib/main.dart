@@ -1,19 +1,26 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sqflite/sqflite.dart';
+import 'package:project/firebase_options.dart';
 
 import 'screen/main_page.dart';
 
-class MyApp extends StatelessWidget {
-  final DatabaseFactory? databaseFactory;
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  runApp(const MyApp());
+}
 
-  const MyApp({super.key, this.databaseFactory});
+class MyApp extends StatelessWidget {
+  const MyApp({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MainPage(databaseFactory: databaseFactory),
+      home: MainPage(),
     );
   }
 }
